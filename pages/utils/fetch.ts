@@ -3,7 +3,7 @@ import { getAccessToken } from "@auth0/nextjs-auth0";
 const baseUrl = "http://localhost:3000";
 
 export const fetcherClient = async (url: string) => {
-  const res = await fetch(url);
+  const res = await fetch(`${baseUrl}${url}`);
   return res.json();
 };
 
