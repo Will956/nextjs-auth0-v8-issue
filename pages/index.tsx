@@ -1,9 +1,22 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "../styles/Home.module.css";
+import { getAccessToken } from "@auth0/nextjs-auth0";
+import { GetServerSideProps } from "next";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
+
+export const getServersideProps: GetServerSideProps = async (ctx) => {
+  const accessToken = await getAccessToken(ctx.req, ctx.res);
+  console.log("accessToken", accessToken);
+
+  return {
+    props: {
+      // Will be passed to the page component as props
+    },
+  };
+};
 
 export default function Home() {
   return (
@@ -26,7 +39,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              By{' '}
+              By{" "}
               <Image
                 src="/vercel.svg"
                 alt="Vercel Logo"
@@ -119,5 +132,5 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
 }
